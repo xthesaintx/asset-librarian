@@ -28,5 +28,27 @@
   "url": "https://wgtngm.com",
   "manifest": "",
   "download": "",
-  "readme": "https://campaigncodex.wgtngm.com/asset-librarian/"
+  "readme": "https://campaigncodex.wgtngm.com/asset-librarian/",
+  "packs": [
+    {
+      "name": "macros",
+      "label": "macros",
+      "path": "packs/macros",
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+  {
+    "name": "AssetLibrarian",
+    "sorting": "m",
+    "color": "#205d9e",
+    "packs": ["macros"]
+  }
+  ],
+  "description": "",
+  "flags": {}
 }

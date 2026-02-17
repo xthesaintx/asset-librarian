@@ -1093,6 +1093,10 @@ width: fit-content;
     border-radius: 2px;
 }
 
+.asset-librarian .category-config .tag-config-item-row.selected-elsewhere:has(input[type="checkbox"]:not(:checked)) {
+    display:none;
+}
+
 .asset-librarian .category-config .compendium-item.selected-elsewhere:has(input[type="checkbox"]:not(:checked)) {
     border: 1px dashed var(--al-accent-hover);
     background: var(--al-bg);

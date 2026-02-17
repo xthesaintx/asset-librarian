@@ -22,8 +22,8 @@
                 </legend>
                 <div class="compendium-list">
                     {{#each this.tags}}
-                    <div class="tag-config-item-row">
-                        <label class="compendium-item {{#if this.selectedElsewhere}}selected-elsewhere{{/if}} {{#if this.isDead}}dead-tag{{/if}}">
+                    <div class="tag-config-item-row {{#if this.selectedElsewhere}}selected-elsewhere{{/if}}">
+                        <label class="compendium-item  {{#if this.isDead}}dead-tag{{/if}}">
                             <input type="checkbox" name="{{../docType}}|{{../id}}|{{this.token}}" {{#if this.checked}}checked{{/if}}>
                             <span>{{this.label}}</span>
                         {{#if this.isDead}}
