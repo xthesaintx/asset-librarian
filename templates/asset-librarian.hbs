@@ -68,7 +68,7 @@
             <div class="folder-tree">
                 {{#*inline "folderTree"}}
                 <div class="folder-item {{#if (eq activeFolderId folder.id)}}active{{/if}}" data-action="selectFolder"
-                    data-folder-id="{{folder.id}}">
+                    data-folder-id="{{folder.id}}" {{#if folder.isPack}}data-pack-collection="{{folder.id}}"{{/if}}>
                     {{#if folder.hasChildren}}
                         <button type="button" class="folder-toggle-btn" data-action="toggleFolderNode" data-folder-id="{{folder.id}}">
                           <i class="fas {{#if folder.isPack}}fa-book-medical{{else}}{{#if folder.expanded}}fa-folder-open{{else}}fa-folder-plus{{/if}}{{/if}}" inert></i>

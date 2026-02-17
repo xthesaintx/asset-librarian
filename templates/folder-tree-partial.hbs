@@ -1,5 +1,5 @@
 <div class="folder-item {{#if (eq activeFolderId folder.id)}}active{{/if}}" data-action="selectFolder"
-    data-folder-id="{{folder.id}}">
+    data-folder-id="{{folder.id}}" {{#if folder.isPack}}data-pack-collection="{{folder.id}}"{{/if}}>
     <i class="fas {{#if folder.isPack}}fa-atlas{{else}}fa-folder{{/if}}"></i> {{folder.name}}
 </div>
 {{#if folder.children.length}}

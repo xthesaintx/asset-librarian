@@ -2843,6 +2843,7 @@ export class AssetLibrarian extends HandlebarsApplicationMixin(ApplicationV2) {
    _createContextMenus() {
         const SELECTORS = {
             TAB_BUTTON: ".asset-tabs .tab-btn",
+            COMPENDIUM_FOLDER_ITEM: ".folder-tree .folder-item[data-pack-collection]",
             IMAGE_CARD: ".asset-card[data-document-type='Image']:not([data-uuid^='Compendium'])",
             ACTOR_CARD: ".asset-card[data-document-type='Actor']:not([data-uuid^='Compendium'])",
             COMPENDIUM_ACTOR: ".asset-card[data-uuid^='Compendium'].asset-card[data-document-type='Actor']",
@@ -2958,6 +2959,11 @@ export class AssetLibrarian extends HandlebarsApplicationMixin(ApplicationV2) {
             hookName: `get${this.documentName}ContextOptions`,
             parentClassHooks: false,
         });
+        this._createContextMenu(this._getCompendiumFolderContextOptions, SELECTORS.COMPENDIUM_FOLDER_ITEM, {
+            fixed: true,
+            hookName: `get${this.documentName}FolderContextOptions`,
+            parentClassHooks: false,
+        });
         this._createContextMenu(this._getTabContextOptions, SELECTORS.TAB_BUTTON, {
             fixed: true,
             hookName: `get${this.documentName}TabContextOptions`,
@@ -2968,6 +2974,17 @@ export class AssetLibrarian extends HandlebarsApplicationMixin(ApplicationV2) {
         /** @inheritDoc */
     _getCompendiumContextOptions() {
         return [GET_IMPORT_TO_WORLD(), this._getShowFolderContextOption()];
+    }
+
+    _getCompendiumFolderContextOptions() {
+        return [
+            {
+                name: game.i18n.localize("ASSET_LIBRARIAN.Buttons.OpenCompendium"),
+                icon: '<i class="fa-solid fa-book-open"></i>',
+                condition: (li) => !!li?.dataset?.packCollection && !!game.packs.get(li.dataset.packCollection),
+                callback: (li) => this._openCompendiumFromFolderContext(li),
+            },
+        ];
     }
 
     _getTabContextOptions() {
@@ -3232,6 +3249,15 @@ export class AssetLibrarian extends HandlebarsApplicationMixin(ApplicationV2) {
         this.activeFolderId = folderId;
         this._resetBatching();
         this._scheduleMainRender(0, { recompute: true });
+    }
+
+    _openCompendiumFromFolderContext(target) {
+        const row = target?.closest?.("[data-pack-collection]") ?? target;
+        const packCollection = row?.dataset?.packCollection;
+        if (!packCollection) return;
+        const pack = game.packs.get(packCollection);
+        if (!pack) return;
+        pack.render(true);
     }
 
     _getEditTagsContextOption(documentType) {

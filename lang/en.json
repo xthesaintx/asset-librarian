@@ -70,7 +70,8 @@
       "CreateTile": "Create Tile",
       "SetBackground": "Set Background",
       "CreateScene": "Create Scene",
-      "ShowFolder": "Show Folder"
+      "ShowFolder": "Show Folder",
+      "OpenCompendium": "Open Compendium"
     },
     "Controls": {
       "PaletteTitle": "Asset Librarian",
