@@ -1,0 +1,248 @@
+<div
+    class="asset-librarian-container {{#if folderPanelOpen}}folder-panel-collapsed{{/if}} {{#if filterPanelOpen}}filter-panel-collapsed{{/if}}">
+    {{!-- Header with Tabs --}}
+    <header class="asset-header">
+        <nav class="asset-tabs">
+            <button type="button" class="mode-btn {{#if isWorld}}active{{/if}}" data-action="toggleMode" title="{{#if isWorld}}{{localize "ASSET_LIBRARIAN.Mode.World"}}{{else}}{{localize "ASSET_LIBRARIAN.Mode.Compendiums"}}{{/if}}">
+                <i class="fas {{#if isWorld}}fa-globe{{else}}fa-book{{/if}}"></i>
+                
+            </button>
+            {{#each tabs}}
+            <button type="button" class="tab-btn {{cssClass}}" data-action="switchTab" data-tab="{{id}}">
+                {{label}}
+                {{#if isDefault}} <i class="fas fa-star tab-default-star" title="{{localize "ASSET_LIBRARIAN.Tabs.DefaultTooltip"}}"></i>{{/if}}
+            </button>
+            {{/each}}
+            {{#if isImageTab}}
+            <button type="button" class="mode-btn" data-action="refreshImages" title="{{localize "ASSET_LIBRARIAN.Buttons.RefreshImages"}}">
+                <i class="fas {{#if isScanning}}fa-spinner fa-spin{{else}}fa-sync{{/if}}"></i>
+            </button>
+            <button type="button" class="mode-btn" data-action="configureImages" title="{{localize "ASSET_LIBRARIAN.Buttons.ConfigureImagePaths"}}">
+                <i class="fas fa-folder-plus"></i>
+            </button>
+            {{/if}}
+        </nav>
+        <div class="header-controls">
+
+            {{#if isGM}}
+            {{#unless (../isImageTab)}}
+            <button type="button" class="dupe-toggle {{#if showDuplicates}}checked{{/if}}" title="{{localize "ASSET_LIBRARIAN.Buttons.ShowDuplicates"}}"
+                data-action="toggleDuplicates">
+                <i class="fas fa-clone"></i>
+            </button>
+            {{/unless}}
+            <button type="button" class="settings-btn" data-action="openSettings" title="{{localize "ASSET_LIBRARIAN.Buttons.ConfigureCompendiums"}}">
+                <i class="fas fa-books"></i>
+            </button>
+            <button type="button" class="settings-btn" data-action="openCategoryConfig" title="{{localize "ASSET_LIBRARIAN.Buttons.ConfigureCategories"}}">
+                <i class="fas fa-diagram-subtask"></i>
+            </button>
+            <button type="button" class="settings-btn" data-action="openTagGroupConfig" title="{{localize "ASSET_LIBRARIAN.Buttons.ConfigureTagGroups"}}">
+                <i class="fas fa-tags"></i>
+            </button>
+            <button type="button" class="settings-btn" data-action="configureFilters" title="{{localize "ASSET_LIBRARIAN.Buttons.ConfigureCustomFilters"}}">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+           {{/if}}
+        </div>
+    </header>
+
+    {{!-- Category Bar --}}
+    {{#if categoryGroups}}
+    <div class="category-bar">
+        {{#each categoryGroups}}
+        <button type="button" class="category-btn {{#if (eq ../activeCategoryGroup this.id)}}active{{/if}}"
+            data-action="selectCategoryGroup" data-group="{{this.id}}">
+            {{this.label}}
+        </button>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{!-- Main Content --}}
+    <div class="asset-main">
+        {{!-- Left Sidebar: Search & Folders --}}
+        <aside class="asset-sidebar folder-panel">
+            <div class="folder-search-box">
+                <input type="text" class="folder-search" placeholder="{{localize "ASSET_LIBRARIAN.Folders.SearchPlaceholder"}}" value="{{folderSearchQuery}}" name="folderSearch">
+            </div>
+            <div class="folder-tree">
+                {{#*inline "folderTree"}}
+                <div class="folder-item {{#if (eq activeFolderId folder.id)}}active{{/if}}" data-action="selectFolder"
+                    data-folder-id="{{folder.id}}">
+                    {{#if folder.hasChildren}}
+                        <button type="button" class="folder-toggle-btn" data-action="toggleFolderNode" data-folder-id="{{folder.id}}">
+                          <i class="fas {{#if folder.isPack}}fa-book-medical{{else}}{{#if folder.expanded}}fa-folder-open{{else}}fa-folder-plus{{/if}}{{/if}}" inert></i>
+                        </button>
+                    {{else}}
+                    <i class="fas {{#if folder.isPack}}fa-atlas{{else}}fa-folder{{/if}}"></i>
+                    {{/if}}
+                    {{folder.name}}
+
+                   </div>
+                {{#if folder.expanded}}
+                <div class="folder-children">
+                    {{#each folder.children}}
+                    {{> folderTree folder=this activeFolderId=../activeFolderId}}
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{/inline}}
+
+                <div class="folder-item {{#unless activeFolderId}}active{{/unless}}" data-action="selectFolder"
+                    data-folder-id="">
+                    <i class="fas fa-layer-group"></i> {{localize "ASSET_LIBRARIAN.Folders.All"}} ({{totalCount}})
+                </div>
+                <div class="folder-item {{#if (eq activeFolderId 'root')}}active{{/if}}" data-action="selectFolder" data-folder-id="root">
+                    <i class="fas fa-folder"></i> {{localize "ASSET_LIBRARIAN.Folders.Unsorted"}}
+                </div>
+                {{#each folders}}
+                {{> folderTree folder=this activeFolderId=../activeFolderId}}
+                {{/each}}
+            </div>
+        </aside>
+        <div class="sidebar-collapser folder-panel-collapser" data-action="toggleFolderPanel">
+            <i class="fas fa-caret-{{#if folderPanelOpen}}right{{else}}left{{/if}}" inert></i>
+        </div>
+        {{!-- Asset Grid --}}
+        <main class="asset-content">
+            <div class="asset-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="asset-search" placeholder="{{localize "ASSET_LIBRARIAN.Search.Placeholder"}}" value="{{searchQuery}}"
+                        name="searchFilter">
+                    <button
+                        type="button"
+                        class="search-clear {{#unless searchQuery}}hidden{{/unless}}"
+                        title="{{localize "ASSET_LIBRARIAN.Search.Clear"}}"
+                        aria-label="{{localize "ASSET_LIBRARIAN.Search.Clear"}}"
+                    >
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <span class="asset-count">{{localize "ASSET_LIBRARIAN.Counts.Showing" visible=assetCount total=totalCount}}</span>
+                <span class="thumbnail-build-status {{#unless thumbnailBuildActive}}hidden{{/unless}}">Building thumbnails {{thumbnailBuildDone}}/{{thumbnailBuildTotal}}</span>
+                <div class="toolbar-right">
+                    {{#if canBulkTagEdit}}
+                    <div class="bulk-select-controls">
+                        <button type="button" class="settings-btn {{#if bulkSelectMode}}active{{/if}}" data-action="toggleBulkSelectMode" title="{{localize "ASSET_LIBRARIAN.Buttons.BulkSelectMode"}}">
+                            <i class="fas fa-check-square"></i>
+                        </button>
+                        {{#if bulkSelectMode}}
+                        <button type="button" class="settings-btn" data-action="clearBulkSelection" title="{{localize "ASSET_LIBRARIAN.Buttons.BulkClearSelection"}}">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <button type="button" class="settings-btn" data-action="applyBulkEditSelected" title="{{localize "ASSET_LIBRARIAN.Buttons.BulkEditSelected"}}">
+                            <i class="fas fa-tags"></i> {{bulkEditTargetLabel}}
+                        </button>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{!-- View Mode Slider --}}
+                    <div class="view-mode-slider">
+                        <button type="button" class="view-mode-btn {{#if (eq viewMode 'list')}}active{{/if}}"
+                            data-action="changeViewMode" data-mode="list" title="{{localize "ASSET_LIBRARIAN.ViewMode.List"}}">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button type="button" class="view-mode-btn {{#if (eq viewMode 'column-list')}}active{{/if}}"
+                            data-action="changeViewMode" data-mode="column-list" title="{{localize "ASSET_LIBRARIAN.ViewMode.ColumnList"}}">
+                            <i class="fas fa-th-list"></i>
+                        </button>
+                        <button type="button" class="view-mode-btn {{#if (eq viewMode 'small')}}active{{/if}}"
+                            data-action="changeViewMode" data-mode="small" title="{{localize "ASSET_LIBRARIAN.ViewMode.Small"}}">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button type="button" class="view-mode-btn {{#if (eq viewMode 'medium')}}active{{/if}}"
+                            data-action="changeViewMode" data-mode="medium" title="{{localize "ASSET_LIBRARIAN.ViewMode.Medium"}}">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button type="button" class="view-mode-btn {{#if (eq viewMode 'large')}}active{{/if}}"
+                            data-action="changeViewMode" data-mode="large" title="{{localize "ASSET_LIBRARIAN.ViewMode.Large"}}">
+                            <i class="fas fa-square"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="asset-grid-container">
+                <div class="asset-grid view-{{viewMode}} {{activeTab}}">
+                    {{#each assets}}
+                    <div class="asset-card {{#if this._isSelected}}selected{{/if}}" data-uuid="{{this.uuid}}" data-action="viewAsset"
+                        data-document-type="{{../activeTab}}" draggable="true" data-drag="true"
+                        data-entry-id="{{this.id}}" data-name="{{this.name}}">
+                        <div class="asset-thumb">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                data-src="{{this._displayImg}}" alt="{{this.name}}" loading="lazy"
+                                onerror="this.src='icons/svg/mystery-man.svg'">
+                            </div>
+                        <div class="asset-info">
+                            <span class="asset-name" title="{{this.name}}">{{this.name}}</span>
+                            <div class="asset-card-actions">
+                                {{#if this._isTagEditLocked}}
+                                <i class="fas fa-lock asset-lock-icon" title="{{localize "ASSET_LIBRARIAN.Tagging.NoPermission"}}"></i>
+                                {{/if}}
+                                {{#if ../showDuplicates}}
+                                <button type="button" class="delete-btn" data-action="deleteAsset"
+                                    data-uuid="{{this.uuid}}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="no-assets">
+                        <i class="fas fa-inbox"></i>
+                        <p>
+                            {{#if ../noTabsEnabled}}
+                            {{localize "ASSET_LIBRARIAN.Empty.NoTabsEnabled"}}
+                            {{else}}
+                            {{localize "ASSET_LIBRARIAN.Empty.NoAssetsFound"}}
+                            {{/if}}
+                        </p>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </main>
+        <div class="sidebar-collapser filter-panel-collapser" data-action="toggleFilterPanel">
+            <i class="fas fa-caret-{{#if filterPanelOpen}}left{{else}}right{{/if}}" inert></i>
+        </div>
+        {{!-- Right Panel: Filters (Collapsible) --}}
+        <aside class="filter-panel">
+            <div class="filter-panel-header">
+                <span>{{localize "ASSET_LIBRARIAN.Filters.Title"}}</span>
+                <div class="filter-header-controls">
+                    <button type="button" class="filter-reset-btn" data-action="resetFilters" title="{{localize "ASSET_LIBRARIAN.Filters.ResetAll"}}">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="filter-panel-content">
+                {{#each filters}}
+                <details class="filter-group" data-filter-key="{{this.key}}" data-filter-group-key="{{nospace this.key}}::{{nospace ../activeTab}}::{{nospace ../activeCategoryGroup}}" {{#if this.open}}open{{/if}}>
+                    <summary class="filter-label">{{this.label}}</summary>
+                    <div class="filter-tags">
+                        {{#each this.values}}
+                        <button type="button" class="filter-tag state-{{this.state}}" data-action="toggleFilter"
+                            data-filter-key="{{../key}}" data-filter-value="{{this.value}}" title="{{../key}}:{{this.value}}">
+                            {{#if (eq this.state 'exclude')}}<i class="fas fa-ban"></i> {{/if}}<span class="al-filter-label">{{this.label}}</span> 
+                            <span class="filter-count">({{this.count}})</span>
+                        </button>
+                        {{/each}}
+                    </div>
+                </details>
+                {{/each}}
+                {{#if unavailableCompendiumCustomFilters.length}}
+                <div class="filter-group">
+                    <span class="filter-label">{{localize "ASSET_LIBRARIAN.Filters.UnavailableInCompendium"}}</span>
+                    <div class="filter-tags">
+                        {{#each unavailableCompendiumCustomFilters}}
+                        <span class="filter-tag state-off">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </aside>
+    </div>
+</div>

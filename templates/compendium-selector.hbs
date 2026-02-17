@@ -1,0 +1,20 @@
+<div class="compendium-selector-content">
+    <p class="hint">{{localize "ASSET_LIBRARIAN.Compendiums.Hint"}}</p>
+
+    {{#each packGroups}}
+    <fieldset class="compendium-group">
+        <legend><i class="fas fa-folder"></i> {{this.label}}</legend>
+        <div class="compendium-list">
+            {{#each this.packs}}
+            <label class="compendium-item {{#if this.selectedElsewhere}}selected-elsewhere{{/if}}">
+                <input type="checkbox" name="{{this.collection}}" {{#if this.checked}}checked{{/if}}>
+                <span class="compendium-item-text">
+                    <span class="compendium-title">{{this.title}}</span>
+                    <span class="compendium-pack-name">{{this.packName}}</span>
+                </span>
+            </label>
+            {{/each}}
+        </div>
+    </fieldset>
+    {{/each}}
+</div>

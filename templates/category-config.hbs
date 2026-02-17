@@ -1,0 +1,20 @@
+<div class="category-config" autocomplete="off">
+    <p class="notes">{{localize "ASSET_LIBRARIAN.CategoryConfig.Hint"}}</p>
+
+    <div class="category-config-list">
+        {{#each groups}}
+        <fieldset class="compendium-group">
+            <legend><i class="fas fa-layer-group"></i> {{this.label}}</legend>
+            <div class="compendium-list">
+                {{#each this.types}}
+                <label class="compendium-item">
+                    <input type="checkbox" name="{{../id}}.{{this.type}}" {{#if this.checked}}checked{{/if}}>
+                    <span>{{this.label}}</span>
+                </label>
+                {{/each}}
+            </div>
+        </fieldset>
+        {{/each}}
+    </div>
+
+</div>

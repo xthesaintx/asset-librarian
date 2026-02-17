@@ -1,0 +1,59 @@
+<div class="asset-librarian-dialog asset-tag-editor">
+        <fieldset class="compendium-group">
+            <legend>
+                <span><i class="fas fa-layer-group"></i> {{localize "ASSET_LIBRARIAN.Tagging.CategoryLabel"}}</span>
+
+        <div class="tag-editor-input">
+                    <input type="text" name="categoryTagInput" value="" placeholder="{{localize "ASSET_LIBRARIAN.Tagging.PlaceholderCategory"}}">
+                    <button type="button" class="filter-tag state-off al-tag-add-btn" data-kind="category"><i class="fas fa-circle-plus"></i></button>
+                </div>
+
+            </legend>        
+
+        <p class="hint">{{localize "ASSET_LIBRARIAN.Tagging.CategoryHint"}}</p>
+
+        <div class="compendium-list tag-category-list">
+            <label class="compendium-item state-off al-tag-option" data-kind="category">
+                <input type="radio" name="categoryTagChoice" value="" {{#if categoryNoneChecked}}checked{{/if}}>
+                <span class="al-filter-label"><i class="fas fa-ban"></i></span>
+            </label>
+            {{#if knownCategoryTags.length}}
+            {{#each knownCategoryTags}}
+            <label class="compendium-item state-off al-tag-option" data-kind="category">
+                <input type="radio" name="categoryTagChoice" value="{{this.value}}" {{#if this.checked}}checked{{/if}}>
+                <span class="al-filter-label">{{this.value}}</span>
+            </label>
+            {{/each}}
+            {{/if}}
+        </div>
+    </fieldset>
+    <fieldset class="compendium-group">
+        <legend>
+        <span><i class="fas fa-tags"></i> {{localize "ASSET_LIBRARIAN.Tagging.FilterLabel"}}</span>
+        <div class="tag-editor-input">
+            <input type="text" name="filterTagInput" value="" placeholder="{{localize "ASSET_LIBRARIAN.Tagging.PlaceholderFilters"}}">
+            <button type="button" class="filter-tag state-off al-tag-add-btn" data-kind="filter"><i class="fas fa-circle-plus"></i></button>
+        </div>
+        </legend>
+        <p class="hint">{{localize "ASSET_LIBRARIAN.Tagging.FilterHint"}}</p>
+        <div class="tag-filter-root">
+            {{#each knownFilterTagGroups}}
+            {{#if ../showGroups}}
+            <fieldset class="compendium-group tag-filter-group">
+                <legend>{{this.label}}</legend>
+                {{/if}}
+                <div class="compendium-list tag-filter-list" data-group-id="{{this.id}}">
+                    {{#each this.options}}
+                    <label class="compendium-item state-off al-tag-option" data-kind="filter">
+                        <input type="checkbox" name="filterTagChoice" value="{{this.value}}" {{#if this.checked}}checked{{/if}}>
+                        <span class="al-filter-label">{{this.value}}</span>
+                    </label>
+                    {{/each}}
+                </div>
+            {{#if ../showGroups}}
+            </fieldset>
+            {{/if}}
+            {{/each}}
+        </div>
+    </fieldset>
+</div>

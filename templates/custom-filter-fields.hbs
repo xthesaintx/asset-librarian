@@ -1,0 +1,30 @@
+<div class="custom-filter-fields-content">
+    <p class="hint">{{localize "ASSET_LIBRARIAN.CustomFilters.Hint"}}</p>
+
+    {{#each sections}}
+    <fieldset class="custom-fields-section" data-doc-type="{{this.docType}}">
+      <legend>{{this.label}}</legend>
+
+        <div class="fields-list">
+            {{#each this.fields}}
+            <div class="field-row" data-index="{{this.index}}">
+                <input type="text" name="{{../docType}}-key-{{this.index}}" value="{{this.key}}" placeholder="{{localize "ASSET_LIBRARIAN.CustomFilters.PlaceholderKey"}}">
+                <input type="text" name="{{../docType}}-label-{{this.index}}" value="{{this.label}}"
+                    placeholder="{{localize "ASSET_LIBRARIAN.CustomFilters.PlaceholderLabel"}}">
+                <input type="text" name="{{../docType}}-path-{{this.index}}" value="{{this.path}}"
+                    placeholder="{{localize "ASSET_LIBRARIAN.CustomFilters.PlaceholderPath"}}" class="path-input">
+                <button type="button" class="remove-field-btn" data-action="removeField" data-doc-type="{{../docType}}"
+                    data-index="{{this.index}}">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            {{/each}}
+        </div>
+        <button type="button" class="add-field-btn" data-action="addField" data-doc-type="{{this.docType}}">
+            <i class="fas fa-plus"></i> {{localize "ASSET_LIBRARIAN.CustomFilters.AddField"}}
+        </button>
+    </fieldset>
+    {{/each}}
+
+        <input type="file" class="import-file-input" accept=".json" style="display: none;">
+</div>

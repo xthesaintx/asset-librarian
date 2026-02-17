@@ -1,0 +1,1398 @@
+/* Asset Librarian - Premium Dark Theme */
+
+.asset-librarian {
+    --al-accent-value: 212, 158, 55;
+    --al-bg: rgb(248, 249, 250);
+    --al-bg-light: rgb(238, 238, 238);
+    --al-bg-mid: rgb(204, 204, 204);
+    --al-accent: rgb(var(--al-accent-value));
+    --al-text-muted: rgb(51, 51, 51);
+    --al-text: rgb(26, 26, 26);
+    --al-accent-hover: rgba(var(--al-accent-value), 0.5);
+    --al-border: rgba(var(--al-bg-mid, 0.8));
+    --al-danger: var(--color-level-error);
+    --al-success: var(--color-level-success);
+    --al-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    background: var(--al-bg);
+    color: var(--al-text);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+
+body.theme-dark .asset-librarian {
+    --al-bg: rgb(24, 27, 32);
+    --al-bg-light: rgb(34, 38, 45);
+    --al-bg-mid: rgb(55, 60, 69);
+    --al-accent: rgb(212, 158, 55);
+    --al-text-muted:rgb(174, 181, 188);
+    --al-text: rgb(241, 243, 245);
+    --al-accent-hover: rgba(var(--al-accent-value), 0.4);
+    --al-border: color-mix(in srgb, var(--al-bg-mid) 70%, transparent);
+    --al-danger: var(--color-level-error);
+    --al-success: var(--color-level-success);
+    --al-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    background: var(--al-bg);
+    color: var(--al-text);
+}
+
+.asset-librarian button:hover,
+.asset-librarian button:focus,
+.asset-librarian button:active,
+.asset-librarian button {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.asset-librarian .window-content {
+    padding: 0;
+    background: var(--al-bg);
+}
+
+/* Container */
+.asset-librarian-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Header */
+.asset-librarian .asset-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: var(--al-bg-light);
+    gap: 16px;
+    flex-shrink: 0;
+    border-bottom: dotted 1px var(--al-bg-mid);
+    padding-bottom: 11px;
+}
+
+.asset-librarian .asset-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.asset-librarian .tab-btn {
+    padding: 8px 8px;
+    background: transparent;
+    border: none;
+    color: var(--al-text-muted);
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.asset-librarian .tab-btn:hover {
+    background: var(--al-accent-hover);
+}
+
+.asset-librarian .tab-btn.active {
+    background: var(--al-accent);
+    color: var(--al-bg);
+    box-shadow: none;
+    outline: none;
+}
+
+.asset-librarian .tab-default-star {
+    margin-left: 4px;
+    font-size: 11px;
+    opacity: 0.85;
+}
+
+.asset-librarian .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.asset-librarian .mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--al-bg);
+    border: none;
+    color: var(--al-text-muted);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s, color 0.2s;
+    width: 32px;
+    max-width: 32px;
+    height: 26px;
+}
+
+.asset-librarian .mode-btn.active {
+    background: var(--al-bg);
+    box-shadow: none;
+}
+
+.asset-librarian .mode-btn:hover {
+    background: var(--al-accent-hover);
+    box-shadow: none;
+}
+
+.asset-librarian .settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    background: none;
+    border: none;
+    color: var(--al-text-muted);
+    cursor: pointer;
+}
+
+.asset-librarian .settings-btn .fa-circle-xmark {
+    color: var(--al-danger);
+}
+
+.asset-librarian .settings-btn:hover {
+    color: var(--al-accent);
+    outline: none;
+    box-shadow: none;
+}
+
+.asset-librarian .dupe-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--al-text-muted);
+    font-size: 12px;
+    border-radius: 6px;
+    background: var(--al-bg);
+    cursor: pointer;
+        margin-right: 4px;
+}
+
+
+.asset-librarian .dupe-toggle.checked {
+    background: var(--al-accent);
+    color: var(--al-bg);
+}
+
+.asset-librarian .bulk-select-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.asset-librarian .asset-card.selected {
+    outline: 2px solid var(--al-accent);
+    outline-offset: -2px;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+}
+
+
+
+/* Main Layout */
+.asset-librarian .asset-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.asset-librarian .asset-sidebar {
+    width: 240px;
+    background: var(--al-bg-light);
+    border-right: dotted 1px var(--al-bg-mid);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.asset-librarian .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1;
+}
+
+.asset-librarian .search-box i {
+    color: var(--al-text-muted);
+}
+
+.asset-librarian .asset-search {
+    flex: 1;
+    background: var(--al-bg);
+    border: 1px solid var(--al-border);
+    color: var(--al-text);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.asset-librarian .asset-search:focus {
+    outline: none;
+    border-color: var(--al-accent);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.asset-librarian .search-clear {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--al-text-muted);
+    background: transparent;
+    cursor: pointer;
+    margin-left: -36px;
+}
+
+.asset-librarian .search-clear:hover {
+    color: var(--al-danger);
+}
+
+.asset-librarian .search-clear.hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.asset-librarian .folder-tree {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.asset-librarian .folder-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 8px 0px 8px;
+}
+
+.asset-librarian .folder-search-box i {
+    color: var(--al-text-muted);
+}
+
+.asset-librarian .folder-search {
+    flex: 1;
+    background: var(--al-bg);
+    border: 1px solid var(--al-border);
+    color: var(--al-text);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.asset-librarian .folder-search:focus {
+    outline: none;
+    border-color: none;
+    box-shadow: none;
+}
+
+.asset-librarian .folder-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: var(--al-text-muted);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 2px;
+}
+
+.asset-librarian .folder-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--al-text);
+}
+
+.asset-librarian .folder-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
+    min-height: 12px;
+    min-width: 12px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.asset-librarian .folder-toggle-spacer {
+    display: inline-block;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+}
+
+.asset-librarian .folder-item.active {
+    background: var(--al-accent);
+    color: white;
+}
+
+.asset-librarian .folder-children {
+    padding-left: 0px;
+    border-left: 1px dotted var(--al-bg-mid);
+    margin-left: 15px;
+}
+
+
+/* Filter Cloud */
+.asset-librarian .filter-cloud {
+    padding: 12px;
+    border-top: 1px solid var(--al-border);
+}
+
+.asset-librarian .al-filter-label{
+        white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.asset-librarian .filter-group {
+    margin-bottom: 12px;
+}
+
+.asset-librarian .filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.asset-librarian .filter-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--al-text-muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+.asset-librarian details.filter-group > summary.filter-label {
+    cursor: pointer;
+    display: list-item;
+}
+
+.asset-librarian details.filter-group > summary.filter-label::marker,
+.asset-librarian details.filter-group > summary.filter-label::-webkit-details-marker {
+    color: var(--al-text-muted);
+}
+
+.asset-librarian details.filter-group > summary.filter-label {
+    cursor: grab;
+}
+
+.asset-librarian details.filter-group.is-dragging {
+    opacity: 0.65;
+}
+
+/*.asset-librarian details.filter-group.drop-before {
+    border-top: 2px solid var(--al-accent);
+}
+*/
+/*.asset-librarian details.filter-group.drop-after {
+    border-bottom: 2px solid var(--al-accent);
+}*/
+
+.asset-librarian details.filter-group.drop-before::before {
+    content: "";
+    left: 0;
+    right: 0;
+    top: -6px;
+    height: 0px;
+    position: relative;
+    border-bottom: 2px dotted var(--al-accent-hover);
+}
+
+
+.asset-librarian details.filter-group.drop-after::after {
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 0px;
+    position: relative;
+    border-bottom: 2px dotted var(--al-accent-hover);
+}
+
+
+.asset-librarian .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.asset-librarian .filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: var(--al-bg);
+    border: none;
+    border-radius: 12px;
+    color: var(--al-text-muted);
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+        overflow: hidden;
+}
+
+.asset-librarian .filter-tag:foucs {
+    border-color: none;
+    box-shadow: none;
+    outline:none;
+}
+
+.asset-librarian .filter-tag:hover {
+    background: var(--al-accent-hover);
+    color: var(--al-text);
+    border-color: none;
+    box-shadow: none;
+    outline:none;
+}
+
+
+/* Include state - green */
+.asset-librarian .filter-tag.state-include {
+    background: #2e7d32;
+    border-color: #2e7d32;
+    color: white;
+}
+
+/* AND state - blue */
+.asset-librarian .filter-tag.state-and {
+    background: #1565c0;
+    border-color: #1565c0;
+    color: white;
+}
+
+
+/* Exclude state - red with icon */
+.asset-librarian .filter-tag.state-exclude {
+    background: #c62828;
+    border-color: #c62828;
+    color: white;
+}
+
+.asset-librarian .filter-tag.state-and i,
+.asset-librarian .filter-tag.state-exclude i {
+    font-size: 10px;
+    margin-right: 2px;
+}
+
+.asset-librarian .filter-count {
+    opacity: 0.7;
+    font-size: 10px;
+}
+
+/* Content Area */
+.asset-librarian .asset-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--al-bg);
+}
+
+.asset-librarian .asset-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    flex-shrink: 0;
+    gap: 16px;
+}
+
+.asset-librarian .asset-count {
+    color: var(--al-text-muted);
+    font-size: 13px;
+}
+
+.asset-librarian .thumbnail-build-status {
+    color: var(--al-text-muted);
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.asset-librarian .thumbnail-build-status.hidden {
+    display: none;
+}
+
+.asset-librarian .asset-grid-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    contain: content;
+}
+
+.asset-librarian .asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    contain: layout style paint;
+}
+
+/* Asset Cards */
+.asset-librarian .asset-card {
+    background: var(--al-bg-light);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--al-border);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    contain: layout style paint;
+    content-visibility: auto;
+    contain-intrinsic-size: 180px 220px;
+}
+
+
+.asset-librarian .asset-card:hover {
+    border-color: var(--al-accent);
+    box-shadow: var(--al-shadow);
+}
+
+.asset-librarian .asset-grid.view-list .asset-card:hover {
+    color: var(--al-accent-hover);
+    box-shadow: none;
+}
+
+.asset-librarian .asset-thumb {
+    aspect-ratio: 1;
+    background: var(--al-bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.asset-librarian .asset-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: 50%;
+}
+
+.asset-librarian .asset-info {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: var(--al-accent-hover);
+}
+
+.asset-librarian .asset-name {
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.asset-librarian .asset-card-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.asset-librarian .asset-lock-icon {
+    color: var(--al-text-muted);
+    opacity: 0.9;
+}
+
+.asset-librarian .delete-btn {
+    background: none;
+    border: none;
+    color: var(--al-danger);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.asset-librarian .delete-btn:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Empty State */
+.asset-librarian .no-assets {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    color: var(--al-text-muted);
+}
+
+.asset-librarian .no-assets i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+/* Scrollbar Styling */
+.asset-librarian ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.asset-librarian ::-webkit-scrollbar-track {
+    background: var(--al-bg);
+}
+
+.asset-librarian ::-webkit-scrollbar-thumb {
+    background: var(--al-border);
+    border-radius: 4px;
+}
+
+.asset-librarian ::-webkit-scrollbar-thumb:hover {
+    background: var(--al-text-muted);
+}
+
+/* Filter Toggle Button */
+.asset-librarian .filter-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: var(--al-bg);
+    border: 1px solid var(--al-border);
+    border-radius: 4px;
+    color: var(--al-text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.asset-librarian .filter-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--al-text);
+}
+
+.asset-librarian .filter-toggle-btn.active {
+    background: var(--al-accent);
+    border-color: var(--al-accent);
+    color: white;
+}
+
+/* Right Filter Panel */
+.asset-librarian .filter-panel {
+    width: 240px;
+    background: var(--al-bg-light);
+    border-left: 1px solid var(--al-border);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.2s ease, opacity 0.2s ease;
+    overflow: hidden;
+}
+
+.asset-librarian .filter-panel.collapsed {
+    width: 0;
+    border-left: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.asset-librarian .filter-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid var(--al-border);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.asset-librarian .filter-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.asset-librarian .filter-mode-toggle {
+    background: var(--al-accent);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    transition: filter 0.15s;
+}
+
+.asset-librarian .filter-mode-toggle:hover {
+    filter: brightness(1.2);
+}
+
+.asset-librarian .filter-panel-close {
+    background: transparent;
+    border: none;
+    color: var(--al-text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.asset-librarian .filter-panel-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--al-text);
+}
+
+.asset-librarian .filter-reset-btn {
+    background: transparent;
+    border: none;
+    color: var(--al-text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.asset-librarian .filter-reset-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--al-accent);
+}
+
+.asset-librarian .filter-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.asset-librarian .filter-panel .filter-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.asset-librarian .filter-panel .filter-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Toolbar Right Section */
+.asset-librarian .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* View Mode Slider */
+.asset-librarian .view-mode-slider {
+    display: flex;
+}
+
+.asset-librarian .view-mode-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 26px;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--al-border);
+    color: var(--al-text-muted);
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+.asset-librarian .view-mode-btn:hover {
+    color: var(--al-accent);
+}
+
+.asset-librarian .view-mode-btn.active {
+    color: var(--al-accent);
+    box-shadow: none;
+    border: none;
+
+}
+
+/* View Mode: Large (default) */
+.asset-librarian .asset-grid.view-large {
+    grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+}
+
+.asset-librarian .asset-grid.Scene.view-large {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.asset-librarian .asset-grid.view-large .asset-card {
+    flex-direction: column;
+}
+
+.asset-librarian .asset-grid.view-large .asset-thumb {
+    aspect-ratio: 1;
+}
+.asset-librarian .asset-grid.Scene.view-large .asset-thumb {
+    aspect-ratio: 3;
+}
+
+
+/* View Mode: Medium */
+.asset-librarian .asset-grid.view-medium {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+.asset-librarian .asset-grid.view-medium .asset-card {
+    flex-direction: column;
+}
+
+.asset-librarian .asset-grid.view-medium .asset-thumb {
+    aspect-ratio: 1;
+}
+
+.asset-librarian .asset-grid.view-medium .asset-name {
+    font-size: 11px;
+}
+
+/* View Mode: Small */
+.asset-librarian .asset-grid.view-small {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+}
+
+.asset-librarian .asset-grid.view-small .asset-card {
+    flex-direction: column;
+}
+
+.asset-librarian .asset-grid.view-small .asset-thumb {
+    aspect-ratio: 1;
+}
+
+.asset-librarian .asset-grid.view-small .asset-info {
+    padding: 4px;
+}
+
+.asset-librarian .asset-grid.view-small .asset-name {
+    font-size: 10px;
+}
+
+/* View Mode: Column List */
+.asset-librarian .asset-grid.view-column-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.asset-librarian .asset-grid.view-column-list .asset-card {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    contain-intrinsic-size: 320px 52px;
+
+}
+
+.asset-librarian .asset-grid.view-column-list .asset-thumb {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+}
+
+.asset-librarian .asset-grid.view-column-list .asset-info {
+    flex: 1;
+    padding: 6px 8px;
+    background: none;
+    overflow: hidden;
+}
+
+.asset-librarian .asset-grid.view-column-list .asset-name {
+    font-size: 12px;
+}
+
+/* View Mode: List */
+.asset-librarian .asset-grid.view-list {
+    grid-template-columns: 1fr;
+    gap: 4px;
+}
+
+.asset-librarian .asset-grid.view-list .asset-card {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    background: none;
+    border-bottom: 1px dotted var(--al-accent);
+    border-radius: 0px;
+    padding-bottom: 4px;
+    contain-intrinsic-size: 700px 44px;
+
+}
+
+.asset-librarian .asset-grid.view-list .asset-thumb {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+}
+
+.asset-librarian .asset-grid.view-list .asset-info {
+    flex: 1;
+    padding: 4px 8px;
+    background: none;
+}
+
+.asset-librarian .asset-grid.view-list .asset-name {
+    font-size: 12px;
+}
+
+
+/* Compendium Selector */
+.asset-librarian .compendium-selector .hint {
+    font-size: 12px;
+    color: var(--color-text-dark-secondary);
+    margin-bottom: 12px;
+}
+
+.asset-librarian .compendium-item.clear-filters {
+width: fit-content;
+    align-self: center;
+}
+
+.asset-librarian .compendium-group {
+    margin-bottom: 12px;
+    border: 1px dotted var(--al-accent-hover);
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.asset-librarian .compendium-group:last-child {
+    margin-bottom: 0;
+}
+.asset-librarian .compendium-group legend {
+    font-weight: bold;
+    padding: 0 8px;
+}
+.asset-librarian .tag-filter-root,
+.asset-librarian .bulk-filter-add-root{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;}
+
+.asset-librarian .compendium-group.tag-filter-group,
+.asset-librarian .compendium-group.bulk-filter-tag-group{
+        flex: 1 0 45%;
+    margin-bottom: 0px;
+}
+
+.asset-librarian.asset-tag-editor-dialog .compendium-group legend {
+    font-weight: bold;
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.asset-librarian.asset-tag-editor-dialog .compendium-group .tag-editor-input{
+    display: flex;
+}
+
+.asset-librarian.asset-tag-editor-dialog .compendium-group .tag-editor-input .al-tag-add-btn{
+    font-size: 14px;
+    background: none;
+    margin-right: 0px;
+    margin-left: -28px;
+    padding: 0px;
+    width: 24px;
+}
+
+.asset-librarian.asset-tag-editor-dialog .compendium-group .tag-editor-input .al-tag-add-btn:hover i{
+    color: var(--al-accent);
+}
+
+.asset-librarian.asset-tag-editor-dialog .compendium-group .tag-editor-input input{
+    font-weight: normal;
+    font-size: 12px;
+    border: none;
+    box-shadow: none;
+}
+
+
+.asset-librarian .compendium-list {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.asset-librarian .compendium-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.asset-librarian .compendium-item input[type="radio"],
+.asset-librarian .compendium-item input[type="checkbox"] {
+    display: none;
+}
+
+
+.asset-librarian .compendium-item {
+    background: var(--al-bg-light);
+}
+
+.asset-librarian .compendium-item:has(input[type="radio"]:checked) ,
+.asset-librarian .compendium-item:has(input[type="checkbox"]:checked) {
+    background: var(--al-accent-hover);
+}
+
+.asset-librarian .compendium-item:has(input[type="radio"]:checked):hover,
+.asset-librarian .compendium-item:hover,
+.asset-librarian .compendium-item:has(input[type="checkbox"]:checked):hover {
+    background: var(--al-accent);
+}
+
+.asset-librarian .compendium-item .compendium-item-text {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.15;
+    align-items: center;
+}
+
+.asset-librarian .compendium-item .compendium-pack-name {
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+.asset-librarian .tag-config-item-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.asset-librarian .tag-config-item-row .dead-tag-remove-btn {
+    padding: 2px 6px;
+    min-height: auto;
+}
+
+.asset-librarian .compendium-item.dead-tag i {
+    color: var(--al-danger);
+}
+
+.asset-librarian .custom-filter-fields .hint {
+    font-size: 11px;
+    color: var(--color-text-dark-secondary);
+    margin-bottom: 12px;
+}
+
+.asset-librarian .custom-filter-fields .hint code {
+    background: var(--color-cool-4);
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+.asset-librarian .category-config .compendium-item.selected-elsewhere:has(input[type="checkbox"]:not(:checked)) {
+    border: 1px dashed var(--al-accent-hover);
+    background: var(--al-bg);
+    display: none;
+}
+
+.asset-librarian .category-config .compendium-item.selected-elsewhere:has(input[type="checkbox"]:checked) {
+    color: var(--al-danger);
+    }
+
+/* CUSTOM FIELDs */
+
+.asset-librarian .custom-fields-section {
+    margin-bottom: 12px;
+    border: 1px dotted var(--al-accent-hover);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: block;
+}
+
+
+.asset-librarian .fields-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.asset-librarian .field-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.asset-librarian .field-row input {
+    padding: 4px 6px;
+    border: 1px solid var(--al-border);
+    font-size: 12px;
+}
+
+.asset-librarian .field-row input:first-child {
+    width: 80px;
+}
+
+.asset-librarian .field-row input:nth-child(2) {
+    width: 100px;
+}
+
+.asset-librarian .field-row input.path-input {
+    flex: 1;
+}
+
+.asset-librarian .add-field-btn,
+.asset-librarian .remove-field-btn {
+    background: transparent;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    background: var(--al-bg-light);
+}
+
+.asset-librarian .remove-field-btn:hover {
+    background: var(--al-danger);
+    color: var(--al-bg);
+}
+
+.asset-librarian .add-field-btn:hover {
+    background: var(--al-accent);
+}
+
+/* END OF  */
+.asset-librarian .sidebar-collapser {
+    height: 100%;
+    align-content: center;
+    padding: 4px;
+    color: var(--al-text);
+    background: var(--al-shadow);
+}
+
+.asset-librarian .sidebar-collapser:hover {
+    background: rgba(var(--al-accent-value), 0.2);
+}
+
+.asset-librarian .sidebar-collapser i:hover {
+    color: var(--al-accent-hover);
+}
+
+
+.application.asset-librarian .asset-librarian-container.folder-panel-collapsed .folder-panel {
+    margin-left: -240px;
+}
+
+.application.asset-librarian .asset-librarian-container.filter-panel-collapsed .filter-panel {
+    margin-right: -240px;
+}
+
+.application.asset-librarian .asset-librarian-container .folder-panel,
+.application.asset-librarian .asset-librarian-container .filter-panel {
+    transition: margin-right 450ms ease, margin-left 450ms ease
+}
+
+
+.asset-librarian.send-to-player .dialog-form.standard-form {
+    overflow: auto;
+    gap: 0px;
+}
+
+.asset-librarian.send-to-player .dialog-content.standard-form {
+    overflow: hidden;
+    gap: 0px;
+}
+
+.asset-librarian.send-to-player .player-selection.playerlist {
+    overflow: scroll;
+    padding-left: 10px;
+    padding-right: 5px;
+    margin-right: 5px;
+    overflow-x: auto;
+}
+
+.asset-librarian.send-to-player .player-selection.playerlist .player-list {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+
+.asset-librarian.send-to-player .player-selection.header {
+    padding: 0px 10px 0px 10px;
+}
+
+.asset-librarian.send-to-player .form-footer {
+    padding: 10px;
+}
+
+.asset-librarian.send-to-player .player-option {
+    display: flex;
+    flex-direction: row;
+    padding: 6px;
+    background: var(--al-bg-light);
+    border-radius: 6px;
+    align-items: center;
+    gap: 16px;
+}
+
+.asset-librarian.send-to-player .player-option:hover {
+    background: var(--al-accent-hover);
+}
+
+.asset-librarian.send-to-player .player-option img {
+    width: 32px;
+}
+
+.asset-librarian.send-to-player .player-option .player-info {
+    flex: 1;
+}
+
+.asset-librarian.dialog .form-footer {
+    padding: 0px 10px 10px 10px;
+}
+
+.asset-librarian.dialog.asset-tag-editor-dialog .dialog-content.standard-form {
+    padding: 10px;
+    gap: 0px;
+    flex:1;
+        overflow: scroll;
+}
+
+.asset-librarian.dialog .dialog-content.standard-form {
+    padding: 10px;
+    gap: 0px;
+}
+
+.asset-librarian.dialog .dialog-form.standard-form {
+    gap: 0px;
+}
+
+.asset-librarian.dialog.asset-tag-editor-dialog .dialog-form.standard-form {
+    gap: 0px;
+        overflow: hidden;
+    flex:1;
+}
+
+.asset-librarian.dialog .dialog-form.standard-form ul {
+    margin: 0px;
+}
+
+.asset-librarian.tag-group-config .window-content .category-config,
+.asset-librarian.category-config .window-content .category-config,
+.asset-librarian.custom-filter-fields .custom-filter-fields-content,
+.asset-librarian.compendium-selector .compendium-selector-content {
+    padding: 10px;
+    overflow: scroll;
+    flex: 1;
+}
+
+.asset-librarian.tag-group-config .category-config p,
+.asset-librarian.category-config .category-config p,
+.asset-librarian.custom-filter-fields .custom-filter-fields-content p,
+.asset-librarian.compendium-selector .compendium-selector-content p {
+    margin-bottom: 10px;
+}
+.asset-librarian.tag-group-config .window-content,
+.asset-librarian.category-config .window-content,
+.asset-librarian.custom-filter-fields .window-content,
+.asset-librarian.compendium-selector .window-content {
+    gap: 0px;
+}
+
+.asset-librarian.image-folder-picker .asset-librarian-dialog textarea,
+.asset-librarian.image-folder-picker .dialog-content.standard-form,
+.asset-librarian.image-folder-picker .dialog-form.standard-form {
+    flex: 1;
+}
+
+.asset-librarian.image-folder-picker .asset-librarian-dialog {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+
+/* If depth is 2, add one '>' */
+.depth-indicator[data-depth="2"]::before { content: ">"; }
+
+/* If depth is 3, add two '>>' */
+.depth-indicator[data-depth="3"]::before { content: ">>"; }
+
+/* If depth is 4, add three '>>>' */
+.depth-indicator[data-depth="4"]::before { content: ">>>"; }
+
+
+
+
+
+
+
+
+/* Category Bar */
+.asset-librarian .category-bar {
+    display: flex;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--al-bg-light);
+    border-bottom: 1px dotted var(--al-bg-mid);
+    align-items: center;
+}
+
+.asset-librarian .category-btn {
+    padding: 6px 6px;
+    background: var(--al-bg);
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--al-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.asset-librarian .category-btn:hover {
+    background: var(--al-bg-mid);
+    color: var(--al-text);
+    border-color: var(--al-text-muted);
+}
+
+.asset-librarian .category-btn.active {
+    background: var(--al-accent);
+    color: white;
+    border-color: var(--al-accent);
+}
+
+/* Category Configuration Dialog */
+.asset-librarian.category-config .category-config-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-config-list .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.category-config-list .form-group label {
+    font-weight: 500;
+    flex: 1;
+}
+
+.category-config-list .form-fields {
+    flex: 0 0 150px;
+}
+
+.category-config-list select {
+    width: 100%;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--al-border);
+}

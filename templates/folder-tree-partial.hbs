@@ -1,0 +1,11 @@
+<div class="folder-item {{#if (eq activeFolderId folder.id)}}active{{/if}}" data-action="selectFolder"
+    data-folder-id="{{folder.id}}">
+    <i class="fas {{#if folder.isPack}}fa-atlas{{else}}fa-folder{{/if}}"></i> {{folder.name}}
+</div>
+{{#if folder.children.length}}
+<div class="folder-children">
+    {{#each folder.children}}
+    {{> "modules/asset-librarian/templates/folder-tree-partial.hbs" folder=this activeFolderId=../activeFolderId}}
+    {{/each}}
+</div>
+{{/if}}

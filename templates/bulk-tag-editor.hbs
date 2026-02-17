@@ -1,0 +1,63 @@
+<div class="asset-librarian-dialog asset-tag-editor">
+    <p class="hint">{{localize "ASSET_LIBRARIAN.Tagging.BulkHint" count=assetCount}}</p>
+    {{#if skippedCount}}
+    <p class="hint">{{localize "ASSET_LIBRARIAN.Tagging.BulkSkippedHint" count=skippedCount}}</p>
+    {{/if}}
+
+    <fieldset class="compendium-group">
+        <legend>
+            <span><i class="fas fa-layer-group"></i> {{localize "ASSET_LIBRARIAN.Tagging.CategoryLabel"}}</span>
+        <div class="tag-editor-input">
+            <input type="text" name="bulkCategoryInput" value="" placeholder="{{localize "ASSET_LIBRARIAN.Tagging.PlaceholderCategory"}}">
+            <button type="button" class="filter-tag state-off al-tag-add-btn" data-kind="category"><i class="fas fa-circle-plus"></i></button>
+        </div></legend>
+        <div class="compendium-list bulk-category-list">
+            <label class="compendium-item state-off al-tag-option" data-kind="category">
+                <input type="radio" name="bulkCategoryChoice" value="__CLEAR__">
+                <i class="fas fa-ban" inert></i>
+                <span class="al-filter-label">{{localize "ASSET_LIBRARIAN.Tagging.None"}}</span>
+            </label>
+            {{#each knownCategoryTags}}
+            <label class="compendium-item state-off al-tag-option" data-kind="category">
+                <input type="radio" name="bulkCategoryChoice" value="{{this}}">
+                <span class="al-filter-label">{{this}}</span>
+            </label>
+            {{/each}}
+        </div>
+    </fieldset>
+
+    <fieldset class="compendium-group">
+        <legend>
+            <span><i class="fas fa-tags"></i> {{localize "ASSET_LIBRARIAN.Tagging.FilterLabel"}}</span>
+        <div class="tag-editor-input">
+            <input type="text" name="bulkFilterAddInput" placeholder="{{localize "ASSET_LIBRARIAN.Tagging.PlaceholderFilters"}}">
+            <button type="button" class="filter-tag state-off al-tag-add-btn" data-kind="add"><i class="fas fa-circle-plus"></i></button>
+        </div></legend>
+        {{#if commonFilterTags.length}}
+        <p class="hint">{{localize "ASSET_LIBRARIAN.Tagging.BulkCommonHint"}}</p>
+        {{/if}}
+        <div class="bulk-filter-add-root">
+            {{#each knownFilterTagGroups}}
+            {{#if ../showGroups}}
+            <fieldset class="compendium-group bulk-filter-tag-group">
+                <legend>{{this.label}}</legend>
+                {{/if}}
+                <div class="compendium-list bulk-filter-add-list" data-group-id="{{this.id}}">
+                    {{#each this.options}}
+                    <label class="compendium-item state-off al-tag-option" data-kind="add">
+                        <input type="checkbox" name="bulkFilterAddChoice" value="{{this.value}}" {{#if this.isCommon}}checked{{/if}} data-common="{{#if this.isCommon}}1{{else}}0{{/if}}">
+                        <span class="al-filter-label">{{this.value}}</span>
+                    </label>
+                    {{/each}}
+                </div>
+            {{#if ../showGroups}}
+        </fieldset>
+{{/if}}
+            {{/each}}
+        </div>
+        <label class="compendium-item clear-filters">
+            <input type="checkbox" name="bulkClearFilters">
+            <span>{{localize "ASSET_LIBRARIAN.Tagging.BulkClearFilters"}}</span>
+        </label>
+    </fieldset>
+</div>

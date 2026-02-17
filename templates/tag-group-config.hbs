@@ -1,0 +1,49 @@
+<div class="category-config" autocomplete="off">
+    <p class="notes">{{localize "ASSET_LIBRARIAN.TagGroupConfig.Hint"}}</p>
+
+    {{#each sections}}
+    <fieldset class="compendium-group" data-doc-type="{{this.docType}}">
+        <legend>
+            <i class="fas fa-tags"></i> {{this.label}}
+            <button type="button" class="folder-toggle-btn" data-action="addTagGroup" data-doc-type="{{this.docType}}">
+                <i class="fas fa-plus"></i>
+            </button>
+        </legend>
+
+        {{#if this.groups.length}}
+        <div class="category-config-list">
+            {{#each this.groups}}
+            <fieldset class="compendium-group">
+                <legend>
+                    <span>{{this.label}}</span>
+                    <button type="button" class="folder-toggle-btn" data-action="removeTagGroup" data-doc-type="{{../docType}}" data-group-id="{{this.id}}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </legend>
+                <div class="compendium-list">
+                    {{#each this.tags}}
+                    <div class="tag-config-item-row">
+                        <label class="compendium-item {{#if this.selectedElsewhere}}selected-elsewhere{{/if}} {{#if this.isDead}}dead-tag{{/if}}">
+                            <input type="checkbox" name="{{../docType}}|{{../id}}|{{this.token}}" {{#if this.checked}}checked{{/if}}>
+                            <span>{{this.label}}</span>
+                        {{#if this.isDead}}
+                        <button type="button" class="folder-toggle-btn dead-tag-remove-btn" data-action="removeDeadTag"
+                            data-doc-type="{{../docType}}" data-token="{{this.token}}"
+                            title="{{localize "ASSET_LIBRARIAN.TagGroupConfig.RemoveDeadTag"}}">
+                            <i class="fas fa-circle-xmark"></i>
+                        </button>
+                        {{/if}}
+                        </label>
+
+                    </div>
+                    {{/each}}
+                </div>
+            </fieldset>
+            {{/each}}
+        </div>
+        {{else}}
+        <p class="notes">{{localize "ASSET_LIBRARIAN.TagGroupConfig.NoGroups"}}</p>
+        {{/if}}
+    </fieldset>
+    {{/each}}
+</div>
