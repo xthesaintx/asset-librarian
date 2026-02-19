@@ -36,6 +36,10 @@ body.theme-dark .asset-librarian {
     color: var(--al-text);
 }
 
+button.open-asset-librarian {
+flex: 0 0 100%;
+}
+
 .asset-librarian button:hover,
 .asset-librarian button:focus,
 .asset-librarian button:active,

@@ -42,6 +42,9 @@ function injectCompendiumIndexFields() {
     }
 }
 
+
+
+
 function ensureLibrarianInstance() {
     if (!game.assetLibrarian.instance) {
         game.assetLibrarian.instance = new AssetLibrarian();
@@ -82,6 +85,42 @@ async function maybeShowWelcomeMessage() {
 
     await game.settings.set(MODULE_ID, "lastWelcomeVersion", moduleVersion);
 }
+
+
+
+function injectSidebarButton(html) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.classList.add("open-asset-librarian");
+    button.innerHTML = `
+      <i class="fa-solid fa-book" inert></i>
+      Asset Librarian
+    `;
+    button.addEventListener("click", event => {
+        event.preventDefault(); // Good practice to prevent bubbling
+        if (game.assetLibrarian?.instance?.rendered) {
+          game.assetLibrarian.instance.close();
+        } else {
+          // Ensure the namespace exists before calling open
+          game.assetLibrarian?.open(); 
+        }
+      });
+
+    let headerActions = html.querySelector(".header-actions");
+    if ( !headerActions ) {
+      headerActions = document.createElement("div");
+      headerActions.className = "header-actions action-buttons flexrow";
+      html.querySelector(":scope > header").insertAdjacentElement("afterbegin", headerActions);
+    }
+    headerActions.append(button);
+  }
+
+
+Hooks.on("renderCompendiumDirectory", (app, html) => injectSidebarButton(html));
+
+
+
+
 
 Hooks.once("init", async () => {
     console.log("Asset Librarian | Initializing");
