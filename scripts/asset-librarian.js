@@ -3748,7 +3748,7 @@ export class AssetLibrarian extends HandlebarsApplicationMixin(ApplicationV2) {
                         if (result.categoryTag) await doc.setFlag(ASSET_LIBRARIAN_FLAG_SCOPE, "categoryTag", result.categoryTag);
                         else await doc.unsetFlag(ASSET_LIBRARIAN_FLAG_SCOPE, "categoryTag");
 
-                        if (result.filterTag.length) await doc.setFlag(ASSET_LIBRARIAN_FLAG_SCOPE, "filterTag", result.filterTag);
+                        if (result.filterTag?.length) await doc.setFlag(ASSET_LIBRARIAN_FLAG_SCOPE, "filterTag", result.filterTag);
                         else await doc.unsetFlag(ASSET_LIBRARIAN_FLAG_SCOPE, "filterTag");
 
                         await this._syncTagRegistryFromAssets(documentType, [{ flags: { [ASSET_LIBRARIAN_FLAG_SCOPE]: result } }]);
