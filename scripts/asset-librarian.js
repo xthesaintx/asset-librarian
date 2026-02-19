@@ -3739,7 +3739,7 @@ export class AssetLibrarian extends HandlebarsApplicationMixin(ApplicationV2) {
                     },
                 ],
                 submit: async (result) => {
-                    if (result === null) {
+                    if (result === null || result === "cancel") {
                         resolve(null);
                         return;
                     }

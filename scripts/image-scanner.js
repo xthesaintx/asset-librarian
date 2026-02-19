@@ -47,6 +47,21 @@ export class ImageScanner {
     static getIndexPath() {
         return `${this.getIndexDirectory()}/${this.INDEX_FILENAME}`;
     }
+    static _normalizePath(path) {
+        const normalized = String(path || "").trim().replace(/\\/g, "/").replace(/^\/+/, "");
+        if (!normalized) return "";
+        return normalized.replace(/\/+$/g, "");
+    }
+
+    static _isThumbnailCachePath(path) {
+        const normalized = this._normalizePath(path).toLocaleLowerCase();
+        if (!normalized) return false;
+
+        const currentWorldCacheDir = this._normalizePath(this.getIndexDirectory()).toLocaleLowerCase();
+        if (normalized === currentWorldCacheDir || normalized.startsWith(`${currentWorldCacheDir}/`)) return true;
+
+        return /^worlds\/[^/]+\/assets\/asset-librarian(?:\/|$)/.test(normalized);
+    }
 
     static async _ensureDirectoryExists(source, folderPath) {
         const fp = foundry.applications.apps.FilePicker.implementation;
@@ -189,10 +204,14 @@ export class ImageScanner {
      */
     static async scanPath(path, source = "data", images = [], { suppressWarnings = false } = {}) {
         const EXT_SET = new Set(this.EXTENSIONS);
+        if (this._isThumbnailCachePath(path)) return true;
+
         try {
             const result = await foundry.applications.apps.FilePicker.implementation.browse(source, path);
             
             for (const file of result.files) {
+                if (this._isThumbnailCachePath(file)) continue;
+
                 const ext = file.split('.').pop().toLowerCase();
                 if (EXT_SET.has(ext)) {
                     images.push({
@@ -209,6 +228,8 @@ export class ImageScanner {
 
             
             for (const dir of result.dirs) {
+                if (this._isThumbnailCachePath(dir)) continue;
+
                 await this.scanPath(dir, source, images, { suppressWarnings: true });
             }
             return true;
