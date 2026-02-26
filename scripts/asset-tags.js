@@ -7,6 +7,7 @@ export const FLAG_TAG_TABS = ASSET_LIBRARIAN_BASE_TABS;
 
 export const CATEGORY_TAG_PATH = `flags.${ASSET_LIBRARIAN_FLAG_SCOPE}.categoryTag`;
 export const FILTER_TAG_PATH = `flags.${ASSET_LIBRARIAN_FLAG_SCOPE}.filterTag`;
+export const CC_TAG_PATH =`flags["campaign-codex"].data.tags`;
 
 export function supportsFlagTagsForTab(tab) {
     return FLAG_TAG_TABS.includes(tab);

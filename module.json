@@ -29,7 +29,7 @@
   "manifest": "",
   "download": "",
   "readme": "https://campaigncodex.wgtngm.com/asset-librarian/",
-  "packs": [
+    "packs": [
     {
       "name": "macros",
       "label": "macros",
@@ -42,13 +42,22 @@
     }
   ],
   "packFolders": [
+    {
+    "name": "WgtnGM",
+    "sorting": "m",
+    "color": "#205d9e",
+    "packs": [],
+    "folders": [
   {
     "name": "AssetLibrarian",
     "sorting": "m",
     "color": "#205d9e",
     "packs": ["macros"]
   }
+      ]
+    }
   ],
   "description": "",
   "flags": {}
 }
+

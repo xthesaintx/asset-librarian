@@ -223,8 +223,9 @@ export class DataManager {
             if (linkedImage) asset.img = linkedImage;
         });
 
-        return assets.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
-        
+        return assets.sort((a, b) =>
+            (a.name || "").localeCompare((b.name || ""), undefined, { numeric: true, sensitivity: "base" })
+        );        
         // return assets.sort((a, b) => a.sort - b.sort);
     }
 

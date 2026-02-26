@@ -3,13 +3,13 @@ import { AssetLibrarian } from "./asset-librarian.js";
 import { DataManager } from "./data-manager.js";
 import { ImageScanner } from "./image-scanner.js";
 import { ASSET_LIBRARIAN_BASE_TABS, helpers } from "./helpers.js";
-import { CATEGORY_TAG_PATH, FILTER_TAG_PATH } from "./asset-tags.js";
+import { CATEGORY_TAG_PATH, FILTER_TAG_PATH, CC_TAG_PATH } from "./asset-tags.js";
 let librarianInstance = null;
 let worldRenderDebounce = null;
 const MODULE_ID = "asset-librarian";
 
 function injectCompendiumIndexFields() {
-    const fieldsToInject = [CATEGORY_TAG_PATH, FILTER_TAG_PATH];
+    const fieldsToInject = [CATEGORY_TAG_PATH, FILTER_TAG_PATH, CC_TAG_PATH];
 
     for (const documentName of CONST.COMPENDIUM_DOCUMENT_TYPES) {
         const DocClass = CONFIG[documentName]?.documentClass;

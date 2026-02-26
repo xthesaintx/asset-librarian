@@ -4,6 +4,7 @@
         JournalEntry: [
             { key: 'pages', label: 'Has Pages', path: '_hasPages' },
             { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+            { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
             { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
         ],
         Scene: [
@@ -70,6 +71,7 @@
             ],
             JournalEntry: [
                 { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+                { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
                 { key: 'collectionName', label: 'Collection', path: 'collectionName' },
                 { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
             ]
@@ -107,6 +109,7 @@
             ],
             JournalEntry: [
                 { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+                { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
                 { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
             ]
         },
@@ -128,6 +131,7 @@
             ],
             JournalEntry: [
                 { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+                { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
                 { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
             ]
         },
@@ -167,6 +171,7 @@
             ],
             JournalEntry: [
                 { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+                { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
                 { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
             ]
         },
@@ -189,6 +194,7 @@
             ],
             JournalEntry: [
                 { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+                { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
                 { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
             ]
         },
@@ -215,6 +221,7 @@
                 { key: 'category', label: 'Category', path: 'system.category' },            ],
             JournalEntry: [
                 { key: 'codexType', label: 'Campaign Codex', path: 'flags["campaign-codex"].type' },
+                { key: 'codexTag', label: 'Campaign Codex Tag', path: 'flags["campaign-codex"].data.tags' },
                 { key: 'sheetClass', label: 'Sheet Type', path: '_sheetClass' }
             ]
         }
