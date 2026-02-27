@@ -322,7 +322,7 @@ export class FilterManager {
         const values = Array.from(valueCounts.entries())
             .map(([value, count]) => ({
                 value,
-                label: this.formatLabel(displayByToken.get(value) ?? value),
+                label: this.formatLabel(displayByToken.get(value) ?? value, fieldDef.key),
                 count,
                 state: "off", 
             }))
@@ -342,12 +342,20 @@ export class FilterManager {
      * Format a value for display
      * Checks game system configs for localized labels (e.g., DND5e itemProperties)
      * @param {string} value 
+     * @param {string} filterKey
      * @returns {string}
      */
-    static formatLabel(value) {
+    static formatLabel(value, filterKey) {
         if (!value) return 'Unknown';
 
         const strValue = String(value);
+        const normalizedValue = strValue.trim().toLocaleLowerCase();
+
+        if (filterKey === "codexType") {
+            if (normalizedValue === "shop") return "Entry";
+            if (normalizedValue === "tag") return "Faction";
+        }
+
         let localized;
 
         if (game.system?.id == "dnd5e"){
