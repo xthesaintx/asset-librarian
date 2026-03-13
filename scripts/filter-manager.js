@@ -370,12 +370,17 @@ export class FilterManager {
         }
         if (localized) return localized;
 
-        
-        return strValue
-            .replace(/([a-z])([A-Z])/g, '$1 $2')
-            .replace(/_/g, ' ')
-            .replace(/\b\w/g, c => c.toUpperCase());
-    }
+        const spaced = strValue
+            .replace(/([\p{Ll}\d])([\p{Lu}])/gu, "$1 $2")
+            .replace(/_/g, " ");
+
+        return spaced.replace(/(^|[\s-])(\p{L})/gu, (match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase()}`);
+    }        
+    //     return strValue
+    //         .replace(/([a-z])([A-Z])/g, '$1 $2')
+    //         .replace(/_/g, ' ')
+    //         .replace(/\b\w/g, c => c.toUpperCase());
+    // }
 
     /**
      * Apply active filters to asset list
